@@ -17,7 +17,7 @@ export function calculate(a, b, operation) {
         case "*":
             return a * b;
         case "/":
-            return (b != 0) ? a / b : null;
+            return (b != 0) ? a / b : null; // throw new Exception("Nulou nelze");
         default:
             return null;
     }
