@@ -12,12 +12,20 @@ export function CalculatorForm({ title }) {
     const [operation, setOperation] = useState(operations[0]);
     const [result, setResult] = useState(0);
 
+    function handleSubmit(event) {
+        event.preventDefault(); // zakázání odeslání formuláře
+        const numA = parseFloat(a);
+        const numB = parseFloat(b);
+        const computedResult = calculate(numA, numB, operation.value);
+        setResult(computedResult);
+    }
+
     return (
         <div>
             <h1>{title}</h1>
-            <form>
-                <NumberInput name={"a"} value={parseInt(a)} label={"První číslo: "} onChange={(e) => setA(e.target.value)} />
-                <NumberInput name={"b"} value={parseInt(b)} label={"Druhé číslo: "} onChange={(e) => setB(e.target.value)} />
+            <form onSubmit={handleSubmit}>
+                <NumberInput name={"a"} label={"První číslo: "} onChange={(e) => setA(e.target.value)} />
+                <NumberInput name={"b"} label={"Druhé číslo: "} onChange={(e) => setB(e.target.value)} />
                 <Select options={operations} onChange={setOperation} value={operation} />
                 <input type="submit" value={"Vypočítej"} />
             </form>
